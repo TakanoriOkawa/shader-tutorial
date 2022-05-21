@@ -8,7 +8,8 @@ attribute vec3 position;
 void main(){
   // TASK: 位置を動かす
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-  modelPosition.x += 5.0; // 少数点をつけないとエラーになる
+  // modelPosition.x += 0.5; // 少数点をつけないとエラーになる
+  modelPosition.z += sin(modelPosition.x * 20.0) * 0.1;
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectionPosition = projectionMatrix  * viewPosition;
 
