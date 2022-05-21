@@ -6,8 +6,14 @@ uniform mat4 modelMatrix; // どこにあるかの位置情報決める行列
 attribute vec3 position;
 
 void main(){
+  // TASK: 位置を動かす
+  vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+  modelPosition.x += 5.0; // 少数点をつけないとエラーになる
+  vec4 viewPosition = viewMatrix * modelPosition;
+  vec4 projectionPosition = projectionMatrix  * viewPosition;
+
   // gl_Positionはglslで決まったものなのでスペルミスしないように
-  gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+  gl_Position = projectionPosition;
   // セミコロンがないとエラーになる
 
   // 3つの行列を掛け合わせて（行列の掛け算）
